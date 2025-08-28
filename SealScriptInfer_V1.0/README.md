@@ -184,11 +184,3 @@ python gen_testset.py \
   Yes. If you didn’t train with `resnet50`, pass `--arch <your_arch>` during inference/evaluation.
 
 ---
-
-## 授權 (License)
-
-僅供研究與個人使用。字體檔之授權以各自原始授權為準。
-For research & personal use. Font files comply with their respective licenses.
-
----
-
