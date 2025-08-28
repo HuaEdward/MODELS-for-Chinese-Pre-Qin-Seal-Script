@@ -1,0 +1,12 @@
+# PyTorch和相关依赖
+torch>=1.12.0
+torchvision>=0.13.0
+torchaudio>=0.12.0
+
+# 其他必需依赖
+opencv-python>=4.5.0
+numpy>=1.21.0
+scikit-learn>=1.0.0
+matplotlib>=3.5.0
+pandas>=1.3.0
+Pillow>=8.0.0
