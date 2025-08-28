@@ -50,8 +50,11 @@ ZhuanShuInfer/
 
 **說明（Important）**
 - `ckpt_best.pt`、`data/meta/labels.json` 是推理**必需**檔案。  
+  - **English:** `ckpt_best.pt` and `data/meta/labels.json` are **required** for inference.
 - 可視化預覽圖若要正確顯示中文，請放一個 CJK 字體到 `fonts/`（如 `NotoSansCJK-Regular.ttc`）。  
-- `scripts/` 是你要識別的任務資料夾集合（原本範例名叫 `rubbings`）。
+  - **English:** To render Chinese correctly in the annotated previews, place a CJK font in `fonts/` (e.g., `NotoSansCJK-Regular.ttc`).
+- `scripts/` 是你要識別的任務資料夾集合（原本範例名叫 `rubbings`）。  
+  - **English:** `scripts/` contains the task folders to be recognized (the previous example folder was named `rubbings`).
 
 ---
 
@@ -60,6 +63,7 @@ ZhuanShuInfer/
 - Python 3.9+
 - PyTorch / TorchVision / timm / Pillow / NumPy / OpenCV (optional)
 - `rarfile`（若需自動解壓 `.rar` 測試字體；系統需安裝 `unrar/unar`）
+- **English:** Python 3.9+; PyTorch / TorchVision / timm / Pillow / NumPy / (optional) OpenCV; `rarfile` if you want to auto-extract `.rar` test fonts (system needs `unrar/unar`).
 
 安裝（Install）：
 ```bash
@@ -68,6 +72,8 @@ pip install -r requirements.txt
 # Ubuntu: sudo apt-get install -y unrar
 # macOS:  brew install unar
 ````
+
+* **English:** Install dependencies with `pip`; install `unrar/unar` if you need to handle `.rar` test fonts.
 
 ---
 
@@ -82,9 +88,13 @@ python infer.py --path scripts/baoshan_page01/001.png --label_font fonts/CJK-Reg
 #  predictions/predictions.csv（追加寫入）
 ```
 
+* **English:** Output files: `predictions/annotated/001_pred.png` and an **appended** row in `predictions/predictions.csv`.
+
 ### 一個資料夾整批推理 + 串聯 (Batch Folder + Top-1 Concatenation)
 
 把要識別的單字圖放在 `inscriptions/<set_name>/` 下：
+
+* **English:** Put all single-character images under `inscriptions/<set_name>/`.
 
 ```bash
 python inscription_infer.py --dir inscriptions/baoshan_page01 --label_font fonts/CJK-Regular.ttf
@@ -95,11 +105,17 @@ python inscription_infer.py --dir inscriptions/baoshan_page01 --label_font fonts
 #  predictions/baoshan_page01/top1_concat.png   # 串聯行的預覽圖
 ```
 
+* **English:** Outputs include annotated images, a CSV of predictions, a concatenated Top-1 string (`top1_concat.txt`), and its preview image.
+
 > 檔名會按「自然排序」串聯（e.g. 1, 2, 10），若要精確的原文順序，請在檔名中自行編號。
+>
+> **English:** Filenames are concatenated in **natural order** (e.g., 1, 2, 10). For exact original reading order, add explicit indices in filenames.
 
 ### 只追加 CSV 不覆蓋 (Append CSV)
 
 `infer.py` 已改為**追加寫**；若要重置歷史：
+
+* **English:** `infer.py` now **appends** to the CSV; to reset history, delete the file.
 
 ```bash
 rm -f predictions/predictions.csv
@@ -111,6 +127,8 @@ rm -f predictions/predictions.csv
 
 利用 `test_fonts/` 的篆書字體 + 你提供的 **2,500 常用字白名單** `common2500.txt`：
 （白名單可為簡/繁，預設會做「簡→繁」統一；如已是繁體可加 `--no_s2t`）
+
+* **English:** Use Seal-style fonts in `test_fonts/` with your **2,500 common-character whitelist** `common2500.txt`. The whitelist may be Simplified or Traditional; by default the script converts **Simplified→Traditional** (use `--no_s2t` to skip if already Traditional).
 
 ```bash
 # 建議先抽樣 300 字快速測
@@ -135,6 +153,7 @@ python gen_testset.py \
 
 * 生成的測試圖：`data/test/*.png`（檔名形如 `<labelid>_<font>_<k>.png`）
 * 自動評估 Top-1 / Top-3 並列印於終端；統計資訊寫入 `data/test/meta_test.json`
+* **English:** Generated test images in `data/test/*.png`; Top-1 / Top-3 accuracy printed to terminal; summary stats saved to `data/test/meta_test.json`.
 
 ---
 
@@ -143,14 +162,26 @@ python gen_testset.py \
 **Q1. 標註圖片是空白？**
 `infer.py / script_infer.py` 已內建自動對比與二值化，並有反相兜底；若仍偏白，請確認輸入為「單字」且背景對比足夠。
 
+* **English:** **Q1. The annotated image looks blank?**
+  `infer.py / script_infer.py` auto-adjusts contrast and binarization (with inversion fallback). If it’s still faint, ensure you’re using **single-character crops** with sufficient contrast.
+
 **Q2. 可視化中文字顯示成方塊？**
 請在 `--label_font` 指定一個 CJK 字體，或把字體放到 `fonts/` 目錄（腳本會自動尋找）。
+
+* **English:** **Q2. Chinese shows as tofu boxes?**
+  Pass a CJK font via `--label_font`, or drop one into `fonts/` (the script will auto-detect).
 
 **Q3. 機率不可信（過度自信）？**
 若有 `calibration.json` 會自動進行溫度縮放（T）；沒有也不影響 Top-k 排名，只是數值可能偏保守/自信。
 
+* **English:** **Q3. Probabilities look miscalibrated?**
+  If `calibration.json` is present, temperature scaling is applied. Without it, Top-k ranking is unaffected, only the probability values may be over/under-confident.
+
 **Q4. 主幹網路（architecture）需一致嗎？**
 是。若訓練時不是 `resnet50`，推理與評估時請加 `--arch <your_arch>`。
+
+* **English:** **Q4. Must the backbone architecture match training?**
+  Yes. If you didn’t train with `resnet50`, pass `--arch <your_arch>` during inference/evaluation.
 
 ---
 
@@ -160,3 +191,4 @@ python gen_testset.py \
 For research & personal use. Font files comply with their respective licenses.
 
 ---
+
