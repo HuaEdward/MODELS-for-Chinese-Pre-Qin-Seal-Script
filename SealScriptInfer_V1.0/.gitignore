@@ -1,0 +1,5 @@
+test_fonts/
+common2500.txt
+gen_testset.py
+.ipynb_checkpoints/
+.venv/

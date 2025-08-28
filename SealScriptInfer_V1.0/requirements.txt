@@ -1,0 +1,11 @@
+torch
+torchvision
+timm
+Pillow
+opencv-python
+numpy
+fonttools
+rarfile
+opencc-python-reimplemented
+albumentations
+tqdm
