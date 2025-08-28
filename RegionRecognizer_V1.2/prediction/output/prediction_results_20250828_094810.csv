@@ -1,0 +1,7 @@
+﻿filename,predicted_country,confidence,chart_path,processed_image_path,Chu_probability,Qi_probability,Qin_probability,SanJin_probability,Yan_probability
+Chu 君.png,Chu,100.0%,Chu 君_result.png,Chu 君_processed.png,100.0%,0.0%,0.0%,0.0%,0.0%
+SanJin 芋.png,Chu,81.9%,SanJin 芋_result.png,SanJin 芋_processed.png,81.9%,15.6%,1.1%,1.3%,0.1%
+Qi 哉.png,Qi,45.8%,Qi 哉_result.png,Qi 哉_processed.png,37.9%,45.8%,9.9%,6.4%,0.0%
+Qi 令.png,Qi,34.4%,Qi 令_result.png,Qi 令_processed.png,23.8%,34.4%,10.5%,30.1%,1.2%
+Chu 命.png,Chu,100.0%,Chu 命_result.png,Chu 命_processed.png,100.0%,0.0%,0.0%,0.0%,0.0%
+Qin英.png,SanJin,29.1%,Qin英_result.png,Qin英_processed.png,27.8%,27.5%,10.7%,29.1%,4.9%
